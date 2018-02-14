@@ -1,0 +1,28 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class CData
+{
+public:
+	int a;
+	void __thiscall printSelf()
+	{
+		printf("林家 : %p\n", this);
+	}
+};
+
+int main()
+{
+	CData Data;
+	CData Data2;
+	printf("Data狼 林家 : %p\n", &Data);
+	printf("Data2狼 林家 : %p\n", &Data2);
+	Data.printSelf();
+	Data2.printSelf();
+	printf("%d\n", sizeof(Data));
+	printf("%d\n", sizeof(Data2));
+
+	return 0;
+}

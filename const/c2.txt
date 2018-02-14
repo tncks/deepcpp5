@@ -1,0 +1,44 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class CData
+{
+private:
+	int Num;
+	mutable int TempNum;
+public:
+	CData(int iNum) : Num(iNum), TempNum(0) {}
+
+	void SetIntNum(int iNum)
+	{
+		Num = iNum;
+	}
+
+	
+	void PrintNum() const
+	{
+		printf("IntNum : %d\n", Num);
+		printf("TempNum : %d\n", TempNum);
+
+		TempNum = Num;
+	}
+};
+
+int main()
+{
+	CData Data1(100);
+	Data1.SetIntNum(200);
+	Data1.PrintNum();
+	Data1.PrintNum();
+
+	cout << endl;
+
+	const CData Data2(100);
+	//Data2.SetIntNum(300);
+	Data2.PrintNum();
+	Data2.PrintNum();
+
+	return 0;
+}

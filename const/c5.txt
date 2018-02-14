@@ -1,0 +1,44 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class CData
+{
+	friend const CData operator+(const CData &rData, const CData &rData2);
+	friend const CData operator+(const CData &&rData, const CData &rData2);
+
+private:
+	int Num;
+public:
+	CData() {}
+	CData(int iNum) : Num(iNum){}
+	
+	void PrintNum() const
+	{
+		printf("IntNum : %d\n", Num);
+	}
+};
+
+const CData operator+(const CData &rData, const CData &rData2)
+{
+	printf("+연산자 호출\n");
+	return CData(rData.Num + rData2.Num);
+}
+
+const CData operator+(const CData &&rrData1, const CData &rData2)
+{
+	printf("+이동 연산자 호출! 이름없는 임시객체 \n");
+	cout << "임시객체 값 : " << rrData1.Num << endl << endl;
+	return CData(rrData1.Num + rData2.Num);
+}
+
+int main()
+{
+	CData Data1(10), Data2(20), Data3(30);
+	CData Data4 = Data1 + Data2 + Data3;
+
+	Data4.PrintNum();
+
+	return 0;
+}

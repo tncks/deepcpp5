@@ -1,0 +1,53 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+#define SAFEDELETEARRAY(PTR) delete[](PTR); PTR = nullptr
+#define SAFEDELETE(PTR) delete(PTR); PTR = nullptr
+
+class CData
+{
+	friend int main();
+
+private:
+	static int DataCount;
+public:
+	CData()
+	{
+		cout << "C Called!!" << endl;
+		DataCount++;
+	}
+
+	~CData()
+	{
+		cout << "D Called!! " << endl;
+		DataCount--;
+	}
+
+	void PrintDataCount()
+	{
+		printf("泅犁 积己等 按眉 : %d俺\n", DataCount);
+	}
+};
+
+int CData::DataCount = 10;
+
+int main()
+{
+	CData::DataCount = 0;
+
+	CData *DataList[5] = { new CData, new CData, new CData, new CData, new CData };
+
+	DataList[0]->PrintDataCount();
+
+	for (int i = 0; i < 5; i++)
+	{
+		SAFEDELETE(DataList[i]);
+		DataList[0]->PrintDataCount();
+		if (DataList[0] == nullptr) printf("last!\n");
+	}
+
+
+	return 0;
+}

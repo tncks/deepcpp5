@@ -1,0 +1,47 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class CData
+{
+private:
+	int Num;
+
+public:
+	explicit CData(int iNum)
+	{
+		Num = iNum;
+	}
+
+	CData PlusTen(CData rData)
+	{
+		rData.Num += 10;
+		return rData;
+	}
+
+	CData(const CData &rData) : Num(rData.Num)
+	{
+		printf("복사 생성자 호출!\n");
+	}
+
+	CData(const CData &&rrData) : Num(rrData.Num)
+	{
+		//Num = rrData.Num;
+		printf("이동 생성자 호출!\n");
+	}
+
+	void PrintNum()
+	{
+		printf("Num : %d\n", Num);
+	}
+};
+
+int main()
+{
+	CData Data(50);
+
+	Data.PlusTen(Data).PrintNum();
+
+	return 0;
+}

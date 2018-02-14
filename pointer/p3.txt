@@ -1,0 +1,39 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class CData
+{
+private:
+	int Num;
+
+public:
+	explicit CData(int iNum)
+	{
+		Num = iNum;
+	}
+
+	CData &PlusTen(CData &rData)
+	{
+		rData.Num += 10;
+		return *this;
+	}
+
+	void PrintNum()
+	{
+		printf("Num : %d\n", Num);
+	}
+};
+
+int main()
+{
+	CData Data(10);
+
+	Data.PlusTen(Data).PrintNum();
+
+	Data.PlusTen(Data);
+	Data.PrintNum();
+
+	return 0;
+}
